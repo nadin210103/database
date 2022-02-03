@@ -12,3 +12,23 @@ select * from usr where (birth_date>='2003-01-01 00:00:00') and (birth_date<='20
 select m.first_name, m.middle_name, m.last_name, m.e_mail, p.name from university_member um join usr m on um.user_id=m.id join position p on um.position_id=p.id
 select m.first_name, m.middle_name, m.last_name, m.e_mail, g.name from group_member gm join university_member um on gm.university_member_id=um.user_id join groups g on gm.group_id=g.id join usr m on um.user_id=m.id;
 select m.first_name, m.middle_name, m.last_name, m.e_mail, d.name from university_member um join usr m on um.user_id=m.id join department d on um.department_id=d.id;
+
+CREATE VIEW user_data AS
+select u.first_name, u.middle_name, u.last_name, a.zip_code, a.city, a.street,
+a.building, a.flat from usr u left join address a on u.id=a.user_id;
+
+
+CREATE VIEW position_user AS
+select m.first_name, m.middle_name, m.last_name, m.e_mail, p.name
+from university_member um left join usr m on um.user_id=m.id
+join position p on um.position_id=p.id;
+
+CREATE VIEW groupa AS
+select m.first_name, m.middle_name, m.last_name, m.e_mail, g.name
+from group_member gm join university_member um on gm.university_member_id=um.user_id
+join groups g on gm.group_id=g.id join usr m on um.user_id=m.id;
+
+CREATE VIEW dept AS
+select m.first_name, m.middle_name, m.last_name, m.e_mail, d.name
+from university_member um join usr m on um.user_id=m.id
+join department d on um.department_id=d.id;
